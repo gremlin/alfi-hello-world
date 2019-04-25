@@ -1,13 +1,31 @@
 package com.example.helloworld;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.gremlin.*;
 
-@SpringBootApplication
 public class HelloWorldApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HelloWorldApplication.class, args);
+
+		final GremlinCoordinatesProvider coordinatesProvider = new GremlinCoordinatesProvider() {
+			@Override
+			public ApplicationCoordinates initializeApplicationCoordinates() {
+				return new ApplicationCoordinates.Builder()
+						.withType("HelloWorldExample")
+						.withField("name", "ana-medina")
+						.build();
+			}
+		};
+		final GremlinServiceFactory gremlinServiceFactory = new GremlinServiceFactory(coordinatesProvider);
+		final GremlinService gremlinService = gremlinServiceFactory.getGremlinService();
+
+		final TrafficCoordinates injectionPoint = new TrafficCoordinates.Builder()
+				.withType("main")
+				.withField("name", "medina")
+				.build();
+		gremlinService.applyImpact(injectionPoint);
 	}
+
+
+
 
 }
