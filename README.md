@@ -1,4 +1,5 @@
 # alfi-hello-world
+This feature is being deprecated.
 Source Code for Gremlin's Tutorial on "Getting Started with Application Level Failure Injection (ALFI) - Hello World" 
 
 Check out the tutorial [here]( 
